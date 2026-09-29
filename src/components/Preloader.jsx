@@ -1,23 +1,31 @@
 import { useEffect, useState } from 'react'
 import { reducedMotion } from '../hooks.jsx'
 
-export default function Preloader({ label, onDone }) {
+export default function Preloader({ label, name, onDone }) {
   const [n, setN] = useState(0)
-  const [phase, setPhase] = useState('count') // count → leave → gone
+  const [phase, setPhase] = useState('count')
 
   useEffect(() => {
     const dur = reducedMotion() ? 1 : 1500
     const start = performance.now()
-    let raf
+    let raf, doneTimer
+    let finished = false
+    const finish = () => {
+      if (finished) return
+      finished = true
+      cancelAnimationFrame(raf)
+      setN(100)
+      doneTimer = setTimeout(() => { setPhase('leave'); onDone() }, 250)
+    }
     const tick = (t) => {
       const p = Math.min((t - start) / dur, 1)
       setN(Math.round(100 * (1 - Math.pow(1 - p, 3))))
       if (p < 1) raf = requestAnimationFrame(tick)
-      else setTimeout(() => { setPhase('leave'); onDone() }, 250)
+      else finish()
     }
     raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fallback = setTimeout(finish, dur + 1500)
+    return () => { cancelAnimationFrame(raf); clearTimeout(fallback); clearTimeout(doneTimer) }
   }, [])
 
   useEffect(() => {
@@ -30,7 +38,7 @@ export default function Preloader({ label, onDone }) {
   return (
     <div className={`preloader ${phase === 'leave' ? 'leave' : ''}`} aria-hidden="true">
       <div className="pre-name">
-        {'SAID MURADKHAN'.split('').map((c, i) => (
+        {`${name.first} ${name.last}`.toUpperCase().split('').map((c, i) => (
           <span key={i} style={{ animationDelay: `${i * 40}ms` }}>{c === ' ' ? ' ' : c}</span>
         ))}
       </div>
@@ -38,6 +46,7 @@ export default function Preloader({ label, onDone }) {
         <span className="mono">{label}…</span>
         <span className="pre-count">{n}<small>%</small></span>
       </div>
+      <div className="pre-mark" aria-hidden="true"><b>{'{'}</b><i /><i /><i /><b>{'}'}</b></div>
       <div className="pre-bar" style={{ transform: `scaleX(${n / 100})` }} />
     </div>
   )

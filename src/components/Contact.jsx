@@ -8,7 +8,7 @@ function BakuClock() {
   return <span>{time}</span>
 }
 
-export default function Contact({ t, go }) {
+export default function Contact({ t, name, go }) {
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try { await navigator.clipboard.writeText(links.email) } catch { /* clipboard blocked */ }
@@ -41,7 +41,7 @@ export default function Contact({ t, go }) {
 
         <div className="socials" data-reveal>
           {socials.map(([name, href, handle]) => (
-            <a key={name} href={href} target={name === 'CV' ? undefined : '_blank'} rel="noreferrer" download={name === 'CV' ? '' : undefined} className="social">
+            <a key={name} href={href} target={name === 'CV' ? undefined : '_blank'} rel="noreferrer" download={name === 'CV' ? '' : undefined} className={`social ${name === 'LinkedIn' ? 'is-linkedin' : name === 'GitHub' ? 'is-github' : ''}`}>
               <span className="mono" lang="en">{name}</span>
               <strong>{handle}</strong>
               <span className="arr" aria-hidden="true">↗</span>
@@ -50,7 +50,7 @@ export default function Contact({ t, go }) {
         </div>
 
         <div className="foot mono">
-          <span>© {new Date().getFullYear()} Said Muradkhan</span>
+          <span>© {new Date().getFullYear()} {name.first} {name.last}</span>
           <span>{t.local}: <BakuClock /></span>
           <span className="hide-sm">{t.built}</span>
           <button onClick={() => go('top')} className="to-top">{t.top} ↑</button>

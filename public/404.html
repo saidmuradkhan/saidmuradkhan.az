@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — Said Muradkhan</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script src="/theme.js"></script>
+    <style>
+      :root { --bg: #0a0a0b; --bg-2: #121214; --fg: #f3efe8; --muted: #8e8a84; --line: rgba(255,255,255,.09); --accent: #ff5a36; --accent-ink: #0a0a0b; color-scheme: dark; }
+      :root[data-theme='light'] { --bg: #f2eee7; --bg-2: #e9e4db; --fg: #111012; --muted: #6d6962; --line: rgba(17,16,18,.12); --accent: #e8431d; --accent-ink: #fff; color-scheme: light; }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 Inter, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; overflow: hidden;
+        background-image: radial-gradient(color-mix(in srgb, var(--fg) 14%, transparent) 1.1px, transparent 1.1px);
+        background-size: 28px 28px; background-position: 14px 14px;
+      }
+      header, footer { display: flex; justify-content: space-between; align-items: center; padding: 22px clamp(16px, 4vw, 56px); }
+      .logo { font: 800 26px/1 'Bricolage Grotesque', Inter, sans-serif; letter-spacing: -0.04em; color: inherit; text-decoration: none; }
+      .logo span { color: var(--accent); }
+      .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+      main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(16px, 4vw, 56px); max-width: 1320px; width: 100%; margin: 0 auto; }
+      .code { color: var(--accent); margin-bottom: 18px; }
+      h1 { margin: 0; font: 800 clamp(120px, 30vw, 360px)/.8 'Bricolage Grotesque', Inter, sans-serif; letter-spacing: -0.06em; display: flex; align-items: center; }
+      h1 .o { color: transparent; -webkit-text-stroke: 2px var(--fg); }
+      h2 { margin: 36px 0 10px; font: 800 clamp(28px, 4vw, 48px)/1.05 'Bricolage Grotesque', Inter, sans-serif; letter-spacing: -0.03em; }
+      p { margin: 0; max-width: 460px; color: var(--muted); }
+      .term { margin-top: 28px; font: 14px/1.7 'JetBrains Mono', ui-monospace, monospace; color: var(--muted); }
+      .term b { color: var(--accent); font-weight: 500; }
+      .term .err { color: #ff7b72; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px;
+        border: 1px solid var(--line); color: inherit; text-decoration: none; font-weight: 500; font-size: 15px;
+        background: color-mix(in srgb, var(--bg-2) 60%, transparent); transition: background .3s, color .3s, border-color .3s;
+      }
+      .btn:hover { border-color: var(--fg); }
+      .btn-fill { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+      .btn-fill:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+      @media (max-width: 640px) { h1 .o { -webkit-text-stroke-width: 1.5px; } .actions .btn { flex: 1; justify-content: center; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="/">SM<span>.</span></a>
+      <span class="mono">Error 404</span>
+    </header>
+    <main>
+      <p class="mono code">(404) — Page not found</p>
+      <h1>4<span class="o">0</span>4</h1>
+      <h2>This page doesn't exist.</h2>
+      <p>The link may be broken, or the page may have moved. Everything I've built is on the home page.</p>
+      <div class="term"><b>❯</b> cd this-page<br /><span class="err">cd: no such file or directory</span></div>
+      <div class="actions">
+        <a class="btn btn-fill" href="/">Back to home →</a>
+        <a class="btn" href="/#projects">See my work</a>
+      </div>
+    </main>
+    <footer class="mono">
+      <span>© 2026 Said Muradkhan</span>
+      <a class="mono" href="mailto:saidmuradkhan414@gmail.com" style="text-decoration:none">saidmuradkhan414@gmail.com</a>
+    </footer>
+  </body>
+</html>

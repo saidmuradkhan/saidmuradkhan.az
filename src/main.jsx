@@ -1,10 +1,31 @@
-import { StrictMode } from 'react'
+import { Component, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
+import NotFound from './components/NotFound.jsx'
 import './styles.css'
+
+class ErrorBoundary extends Component {
+  state = { failed: false }
+  static getDerivedStateFromError() { return { failed: true } }
+  componentDidCatch(error) { console.error(error) }
+  render() {
+    if (!this.state.failed) return this.props.children
+    return (
+      <div className="boot-fail">
+        <p className="mono">Something went wrong</p>
+        <h1>This page didn't load properly.</h1>
+        <a className="btn btn-fill" href="/">Reload</a>
+      </div>
+    )
+  }
+}
+
+const isHome = ['/', '/index.html'].includes(window.location.pathname)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      {isHome ? <App /> : <NotFound />}
+    </ErrorBoundary>
   </StrictMode>,
 )

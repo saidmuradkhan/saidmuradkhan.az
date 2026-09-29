@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const SECTIONS = ['about', 'work', 'projects', 'skills', 'contact']
 
-export default function Header({ t, lang, setLang, theme, setTheme, go }) {
+export default function Header({ t, theme, setTheme, go }) {
   const [active, setActive] = useState('')
   const [hidden, setHidden] = useState(false)
   const bar = useRef(null)
@@ -37,13 +37,6 @@ export default function Header({ t, lang, setLang, theme, setTheme, go }) {
           SM<span>.</span>
         </a>
         <div className="top-actions">
-          <div className="lang-switch" role="group" aria-label="Language">
-            {['az', 'en'].map((l) => (
-              <button key={l} className={lang === l ? 'on' : ''} onClick={() => setLang(l)} aria-pressed={lang === l}>
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
           <button
             className="theme-btn"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

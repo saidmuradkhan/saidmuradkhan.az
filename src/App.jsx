@@ -18,21 +18,15 @@ const read = (k, fallback) => { try { return localStorage.getItem(k) || fallback
 const save = (k, v) => { try { localStorage.setItem(k, v) } catch { /* private mode */ } }
 
 export default function App() {
-  const [lang, setLang] = useState(() => read('lang', 'az'))
   const [theme, setTheme] = useState(() => read('theme', 'dark'))
   const [loaded, setLoaded] = useState(false)
   const lenis = useRef(null)
-  const t = content[lang]
+  const t = content
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     save('theme', theme)
   }, [theme])
-
-  useEffect(() => {
-    document.documentElement.lang = lang
-    save('lang', lang)
-  }, [lang])
 
   useEffect(() => {
     if (reducedMotion()) return
@@ -54,24 +48,31 @@ export default function App() {
     else lenis.current?.stop()
   }, [loaded])
 
-  const go = useCallback((id) => {
+  const go = useCallback((id, { instant = false } = {}) => {
     const el = id === 'top' ? 0 : document.getElementById(id)
-    if (lenis.current) lenis.current.scrollTo(el, { offset: 0, duration: 1.4 })
-    else if (el) el.scrollIntoView({ behavior: 'smooth' })
-    else window.scrollTo({ top: 0, behavior: 'smooth' })
+    const behavior = instant ? 'instant' : 'smooth'
+    if (lenis.current) lenis.current.scrollTo(el, instant ? { immediate: true, force: true } : { offset: 0, duration: 1.4 })
+    else if (el) el.scrollIntoView({ behavior })
+    else window.scrollTo({ top: 0, behavior })
   }, [])
 
-  useReveal([lang, loaded])
+  // Honour links like /#projects once the preloader has handed over.
+  useEffect(() => {
+    const id = window.location.hash.slice(1)
+    if (loaded && id && document.getElementById(id)) go(id, { instant: true })
+  }, [loaded, go])
+
+  useReveal([loaded])
   useMagnetic()
 
   return (
     <>
-      <Preloader label={t.loading} onDone={() => setLoaded(true)} />
+      <Preloader label={t.loading} name={t.name} onDone={() => setLoaded(true)} />
       <Cursor />
       <div className="grain" aria-hidden="true" />
-      <Header t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} go={go} />
+      <Header t={t} theme={theme} setTheme={setTheme} go={go} />
       <main>
-        <Hero t={t.hero} ready={loaded} go={go} />
+        <Hero t={t.hero} name={t.name} ready={loaded} go={go} />
         <Marquee />
         <About t={t.about} term={t.term} go={go} />
         <Work t={t.work} />
@@ -79,7 +80,7 @@ export default function App() {
         <Skills t={t.skills} />
         <Education t={t.edu} />
       </main>
-      <Contact t={t.contact} go={go} />
+      <Contact t={t.contact} name={t.name} go={go} />
     </>
   )
 }
