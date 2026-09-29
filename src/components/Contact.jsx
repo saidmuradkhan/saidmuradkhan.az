@@ -18,8 +18,8 @@ export default function Contact({ t, name, go }) {
 
   const socials = [
     ['GitHub', links.github, 'saidmuradkhan'],
-    ['LinkedIn', links.linkedin, 'Said Muradkhan'],
     ['GitLab', links.gitlab, 'saidmuradkhan414'],
+    ['LinkedIn', links.linkedin, 'Said Muradkhan'],
     ['CV', links.cv, 'PDF ↓'],
   ]
 
@@ -41,7 +41,7 @@ export default function Contact({ t, name, go }) {
 
         <div className="socials" data-reveal>
           {socials.map(([name, href, handle]) => (
-            <a key={name} href={href} target={name === 'CV' ? undefined : '_blank'} rel="noreferrer" download={name === 'CV' ? '' : undefined} className={`social ${name === 'LinkedIn' ? 'is-linkedin' : name === 'GitHub' ? 'is-github' : ''}`}>
+            <a key={name} href={href} target={name === 'CV' ? undefined : '_blank'} rel="noreferrer" download={name === 'CV' ? '' : undefined} className={`social ${name === 'LinkedIn' ? 'is-linkedin' : name === 'GitHub' ? 'is-github' : name === 'GitLab' ? 'is-gitlab' : ''}`}>
               <span className="mono" lang="en">{name}</span>
               <strong>{handle}</strong>
               <span className="arr" aria-hidden="true">↗</span>

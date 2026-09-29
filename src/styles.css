@@ -6,10 +6,10 @@
   --fg: #f3efe8;
   --muted: #8e8a84;
   --line: rgba(255, 255, 255, 0.09);
-  --accent: #ff5a36;
+  --accent: #1fce75;
   --accent-ink: #0a0a0b;
   --dot: rgba(243, 239, 232, 0.22);
-  --glow: rgba(255, 90, 54, 0.22);
+  --glow: rgba(31, 206, 117, 0.2);
   --display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
   --body: 'Inter', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -24,10 +24,10 @@
   --fg: #111012;
   --muted: #6d6962;
   --line: rgba(17, 16, 18, 0.12);
-  --accent: #e8431d;
+  --accent: #087f45;
   --accent-ink: #fff;
   --dot: rgba(17, 16, 18, 0.2);
-  --glow: rgba(232, 67, 29, 0.16);
+  --glow: rgba(8, 127, 69, 0.14);
   color-scheme: light;
 }
 
@@ -415,9 +415,10 @@ html.cursor-out .cursor-dot, html.cursor-out .cursor-ring { opacity: 0; }
   .hero-foot { margin-top: auto; }
   .hero-title { font-size: min(19.5vw, 84px); }
   .hero-role { margin-top: 20px; }
-  .hero-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
-  .hero-cta .btn { width: 100%; justify-content: center; padding: 0 12px; }
-  .hero-cta .btn-icon { gap: 8px; }
+  /* 6-column grid: the two main actions take half each, the three socials a third each */
+  .hero-cta { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 28px; }
+  .hero-cta .btn { grid-column: span 3; width: 100%; justify-content: center; padding: 0 12px; }
+  .hero-cta .btn-icon { grid-column: span 2; gap: 7px; padding: 0 8px; font-size: 14px; }
   .hero-cta .btn-icon svg { width: 18px; height: 18px; }
   .btn-label { display: inline; }
   .hero-title .word:nth-child(2) { -webkit-text-stroke-width: 1px; }
@@ -461,6 +462,11 @@ html.cursor-out .cursor-dot, html.cursor-out .cursor-ring { opacity: 0; }
 .social.is-github::before { background: var(--github); }
 .social.is-github:hover, .social.is-github:hover .mono { color: #fff; }
 .social.is-github:hover { border-color: var(--github-line); }
+:root { --gitlab: #e24329; }
+.btn.is-gitlab:hover { background: var(--gitlab); border-color: var(--gitlab); color: #fff; }
+.social.is-gitlab::before { background: var(--gitlab); }
+.social.is-gitlab:hover, .social.is-gitlab:hover .mono { color: #fff; }
+.social.is-gitlab:hover { border-color: var(--gitlab); }
 
 /* Fallback screen rendered by the error boundary in main.jsx */
 .boot-fail { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; padding: 0 var(--pad); max-width: 1320px; margin: 0 auto; }
