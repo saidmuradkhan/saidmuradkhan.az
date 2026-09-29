@@ -1,6 +1,6 @@
 # Said Muradkhan — Portfolio
 
-**https://saidmuradkhan.az**
+**https://saidmuradkhan.dev**
 
 ![Hero](.github/screenshots/hero.png)
 ![Projects](.github/screenshots/projects.png)
