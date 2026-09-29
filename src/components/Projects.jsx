@@ -60,6 +60,71 @@ function RouteMap({ l }) {
   )
 }
 
+function MiniCart({ l }) {
+  const items = [
+    { name: 'Sony WH-1000XM5', price: 699 },
+    { name: 'Apple Watch S9', price: 999 },
+    { name: 'MX Master 3S', price: 249 },
+  ]
+  const [qty, setQty] = useState([1, 0, 2])
+  const change = (i, d) => setQty((q) => q.map((v, j) => (j === i ? Math.min(5, Math.max(0, v + d)) : v)))
+  const total = items.reduce((sum, it, i) => sum + it.price * qty[i], 0)
+  const goal = 1500
+  return (
+    <div className="vis minicart" onClick={(e) => e.stopPropagation()}>
+      <ul>
+        {items.map((it, i) => (
+          <li key={it.name} className={qty[i] ? '' : 'off'}>
+            <span>{it.name}</span>
+            <span className="qty mono">
+              <button onClick={() => change(i, -1)} aria-label={`${l.less} ${it.name}`} data-cursor="−">−</button>
+              <b>{qty[i]}</b>
+              <button onClick={() => change(i, 1)} aria-label={`${l.more} ${it.name}`} data-cursor="+">+</button>
+            </span>
+            <span className="mono">{it.price * qty[i]} ₼</span>
+          </li>
+        ))}
+      </ul>
+      <div className="cart-foot mono">
+        <div className="bar"><i style={{ width: `${Math.min(100, (total / goal) * 100)}%` }} /></div>
+        <span>{total >= goal ? l.freeShip : `${goal - total} ₼ ${l.toFree}`}</span>
+        <strong>{total} ₼</strong>
+      </div>
+    </div>
+  )
+}
+
+function Mixer({ l }) {
+  const ings = [
+    { name: 'Rum', c: 55 }, { name: 'Lime', c: 35 }, { name: 'Mint', c: 75 },
+    { name: 'Sugar', c: 20 }, { name: 'Soda', c: 10 },
+  ]
+  const [on, setOn] = useState(new Set([0, 1]))
+  const toggle = (i) => setOn((s) => { const n = new Set(s); n.has(i) ? n.delete(i) : n.add(i); return n })
+  const layers = ings.filter((_, i) => on.has(i))
+  return (
+    <div className="vis mixer" onClick={(e) => e.stopPropagation()}>
+      <div className="glass" aria-hidden="true">
+        {layers.map((g) => (
+          <span key={g.name} style={{ height: `${100 / ings.length}%`, background: `color-mix(in srgb, var(--accent) ${g.c}%, var(--bg-3))` }} />
+        ))}
+      </div>
+      <div className="mix-side">
+        <div className="chips">
+          {ings.map((g, i) => (
+            <button key={g.name} className={on.has(i) ? 'on' : ''} onClick={() => toggle(i)} aria-pressed={on.has(i)} data-cursor={on.has(i) ? '−' : '+'}>
+              {g.name}
+            </button>
+          ))}
+        </div>
+        <span className="mono">{on.size === ings.length ? `Mojito ✓` : `${on.size}/${ings.length} ${l.ingredients}`}</span>
+      </div>
+    </div>
+  )
+}
+
+const visuals = { seatmap: SeatMap, route: RouteMap, cart: MiniCart, mixer: Mixer }
+
 function Card({ p, i, view, l }) {
   const ref = useRef(null)
   const onMove = (e) => {
@@ -72,16 +137,17 @@ function Card({ p, i, view, l }) {
     ref.current.style.transform = `perspective(1100px) rotateY(${(x - 0.5) * 6}deg) rotateX(${(0.5 - y) * 6}deg)`
   }
   const reset = () => { ref.current.style.transform = '' }
+  const Vis = visuals[p.vis]
 
   return (
     <article className="pcard" ref={ref} onPointerMove={onMove} onPointerLeave={reset} data-reveal>
       <div className="pcard-top">
-        <span className="mono">0{i + 1} / {p.kind}</span>
+        <span className="mono">{String(i + 1).padStart(2, '0')} / {p.kind}</span>
         <span className="mono">{p.year}</span>
       </div>
-      {i === 0 ? <SeatMap l={l} /> : <RouteMap l={l} />}
+      {Vis && <Vis l={l} />}
       <div className="pcard-body">
-        <h3>{p.name}<span className="clone"> clone</span></h3>
+        <h3>{p.name}{p.clone && <span className="clone"> clone</span>}</h3>
         <div className="features">
           {p.features.map((f) => <span key={f}>{f}</span>)}
         </div>
