@@ -54,6 +54,7 @@ function Terminal({ term, go }) {
     setHist((h) => [cmd, ...h])
     setHi(-1)
     if (cmd === 'clear') { setLines([]); return }
+    if (cmd === 'cls') { setLines([]); return }
     const map = { help: term.help, whoami: term.whoami, skills: term.skills, projects: term.projects, contact: term.contact, hire: term.hire, sudo: '🔒 nice try.', ls: 'about.md  work/  projects/  cv.pdf' }
     const reply = map[cmd] ?? term.unknown + cmd
     setLines((l) => [...l, { k: 'in', v: raw }, { k: cmd in map ? 'out' : 'err', v: reply }])
