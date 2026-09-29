@@ -118,7 +118,7 @@ html.cursor-out .cursor-dot, html.cursor-out .cursor-ring { opacity: 0; }
 .topbar::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(var(--bg), transparent); opacity: 0.85; pointer-events: none; }
 .topbar.hide { transform: translateY(-110%); }
 .logo { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -0.04em; display: inline-block; transition: transform 0.3s var(--ease); }
-.logo span { color: var(--accent); }
+.logo span { color: var(--accent); font-family: var(--mono); font-weight: 500; font-size: 0.36em; letter-spacing: -0.28em; margin-left: 2px; vertical-align: baseline; }
 .top-actions { display: flex; gap: 10px; align-items: center; }
 .theme-btn {
   background: color-mix(in srgb, var(--bg-2) 75%, transparent); backdrop-filter: blur(12px);

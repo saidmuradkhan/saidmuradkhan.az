@@ -20,6 +20,8 @@ class ErrorBoundary extends Component {
   }
 }
 
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+
 const isHome = ['/', '/index.html'].includes(window.location.pathname)
 
 createRoot(document.getElementById('root')).render(

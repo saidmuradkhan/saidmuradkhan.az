@@ -24,7 +24,7 @@
       }
       header, footer { display: flex; justify-content: space-between; align-items: center; padding: 22px clamp(16px, 4vw, 56px); }
       .logo { font: 800 26px/1 'Bricolage Grotesque', Inter, sans-serif; letter-spacing: -0.04em; color: inherit; text-decoration: none; }
-      .logo span { color: var(--accent); }
+      .logo span { color: var(--accent); font: 500 0.36em/1 'JetBrains Mono', ui-monospace, monospace; letter-spacing: -0.28em; margin-left: 2px; vertical-align: baseline; }
       .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
       main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(16px, 4vw, 56px); max-width: 1320px; width: 100%; margin: 0 auto; }
       .code { color: var(--accent); margin-bottom: 18px; }
@@ -50,7 +50,7 @@
   </head>
   <body>
     <header>
-      <a class="logo" href="/">SM<span>.</span></a>
+      <a class="logo" href="/">SM<span>{}</span></a>
       <span class="mono">Error 404</span>
     </header>
     <main>

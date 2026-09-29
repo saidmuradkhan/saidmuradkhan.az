@@ -17,7 +17,7 @@ export default function NotFound() {
   return (
     <div className="nf">
       <header className="nf-bar">
-        <a className="logo" href="/">SM<span>.</span></a>
+        <a className="logo" href="/">SM<span>{"{}"}</span></a>
         <span className="mono muted">Error 404</span>
       </header>
       <main className="nf-main">

@@ -37,7 +37,7 @@ export default function Hero({ t, name, ready, go }) {
       <div className="wrap hero-inner">
         <p className="eyebrow mono"><span className="pulse" /> {t.eyebrow}</p>
         <h1 className="hero-title">
-          <Letters key={name.first} word={name.first} delay={100} />
+          <Letters key={name.first} word={name.first} delay={100} />{' '}
           <Letters key={name.last} word={name.last} delay={300} />
         </h1>
         <p className="hero-role"><span className="mono">&gt;</span> <Typer words={t.roles} /></p>

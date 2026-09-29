@@ -34,7 +34,7 @@ export default function Header({ t, theme, setTheme, go }) {
       <div className="progress" ref={bar} />
       <header className={`topbar ${hidden ? 'hide' : ''}`}>
         <a href="#top" className="logo" onClick={(e) => link(e, 'top')} data-magnetic>
-          SM<span>.</span>
+          SM<span>{"{ }"}</span>
         </a>
         <div className="top-actions">
           <button

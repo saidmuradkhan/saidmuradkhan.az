@@ -59,7 +59,9 @@ export default function App() {
   // Honour links like /#projects once the preloader has handed over.
   useEffect(() => {
     const id = window.location.hash.slice(1)
-    if (loaded && id && document.getElementById(id)) go(id, { instant: true })
+    if (!loaded || !id) return
+    if (document.getElementById(id)) go(id, { instant: true })
+    history.replaceState(null, '', window.location.pathname + window.location.search)
   }, [loaded, go])
 
   useReveal([loaded])
