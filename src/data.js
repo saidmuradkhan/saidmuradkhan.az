@@ -42,7 +42,7 @@ export const content = {
     p2: 'I\'m comfortable on both sides of the stack: PHP, Laravel, JavaScript, React, SQL and Git. Server configuration and deployment are part of the job too.',
     stats: [
       { n: 7, s: '', label: 'real projects' },
-      { n: 3, s: '', label: 'systems in production' },
+      { n: 2, s: '', label: 'systems in production' },
       { n: 20, s: '+', label: 'technologies' },
       { n: 5, s: '', label: 'languages' },
     ],
